@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
-import axios from 'axios';
-import ModalMenu from "./ModalMenu";
+//todo import axios from 'axios';
+import ModalMenuComp from "./ModalMenu";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import TextField from "material-ui/TextField";
@@ -153,7 +153,7 @@ export default class Calendar extends Component {
     updatedEvent[index].desc = desc;
     updatedEvent[index].start = start;
     updatedEvent[index].end = end;
-    event.preventDefault();
+    //event.preventDefault();
 		console.log('first state: ', this.state);
 		// and some other stuff
 		let route = 'http://localhost:5656/api/events';
@@ -282,7 +282,7 @@ export default class Calendar extends Component {
           
           <div>
 
-     <ModalMenu 
+     <ModalMenuComp 
         onChange={e => {
           this.setCategory(e.target.value);
         }}
@@ -329,7 +329,7 @@ export default class Calendar extends Component {
           open={this.state.openEvent}
           onRequestClose={this.handleClose}
         >
-          <ModalMenu 
+          <ModalMenuComp 
             defaultValue={this.state.category}
             onChange={e => {
               this.setCategory(e.target.value);
