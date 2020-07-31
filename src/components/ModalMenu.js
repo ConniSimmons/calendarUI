@@ -1,94 +1,126 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import FlightIcon from '@material-ui/icons/Flight';
+import WorkIcon from '@material-ui/icons/Work';
+import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
+import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
+import GroupIcon from '@material-ui/icons/Group';
+import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import AddIcon from '@material-ui/icons/Add';
-import Typography from '@material-ui/core/Typography';
-import { blue } from '@material-ui/core/colors';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import "../App.css";
 
-const category = ['reminder', 'appointment', 'meeting', 'personal', 'work', 'travel'];
 
-const useStyles = makeStyles({
-    avatar: {
-      backgroundColor: blue[100],
-      color: blue[600],
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.common.white,
+      },
     },
-  });
-  
-  function ModalMenu(props) {
-    const classes = useStyles();
-    const { onClose, selectedValue, open } = props;
-  
-    const handleClose = () => {
-      onClose(selectedValue);
-    };
-  
-    const handleListItemClick = (value) => {
-      onClose(value);
-    };
-  
-    return (
-      <Dialog 
-        style={{ zIndex: 1500 }}  
-        onClose={handleClose} 
-        aria-labelledby="simple-dialog-title" 
-        open={open}>
-        
-        <List>
-          {category.map((category) => (
-            <ListItem 
-                button onClick={() => handleListItemClick(category)} key={category}>
-              <ListItemAvatar>
-                <Avatar className={classes.avatar}>
-                  <CalendarTodayIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={category} />
-            </ListItem>
-          ))}
-  
-          
-        </List>
-      </Dialog>
-    );
-  }
-  
-  ModalMenu.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    open: PropTypes.bool.isRequired,
-    selectedValue: PropTypes.string.isRequired,
+  },
+}))(MenuItem);
+
+export default function ModalMenu(props) {
+  const [anchorEl, setAnchorEl] = React.useState(false);
+  console.log(props);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.target);
   };
-  
-  export default function ModalMenuComp() {
-    const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState(category[1]);
-  
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = (value) => {
-      setOpen(false);
-      setSelectedValue(value);
-    };
-  
-    return (
-      <div>
-        <Typography variant="subtitle1">Selected: {selectedValue}</Typography>
-        <br />
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          Choose Event Category
-        </Button>
-        <ModalMenu selectedValue={selectedValue} open={open} onClose={handleClose} />
-      </div>
-    );
-  }
-  
+
+  const handleClose = (eventCategory) => {
+    props.updateCategory(eventCategory)
+    setAnchorEl(null);
+    
+  };
+
+  return (
+    <div>
+      <Button
+        aria-controls="customized-menu"
+        aria-haspopup="true"
+        variant="contained"
+        color="primary"
+        id="category"
+        onClick={handleClick}
+       
+      >
+        Choose Event Category
+      </Button>
+      <StyledMenu
+        style={{ zIndex: 1500 }}
+        id="customized-menu"
+        // anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <StyledMenuItem onClick={(e) => handleClose("Reminder")}>
+          <NotificationImportantIcon >
+            <NotificationImportantIcon fontSize="small" />
+          </NotificationImportantIcon>
+          <ListItemText primary="Reminder" />
+        </StyledMenuItem>
+
+        <StyledMenuItem onClick={(e) => handleClose('Appointment')}>
+          <PriorityHighIcon>
+            <DraftsIcon fontSize="small" />
+          </PriorityHighIcon>
+          <ListItemText primary="Appointment" />
+        </StyledMenuItem>
+
+        <StyledMenuItem onClick={(e) => handleClose('Meeting')}>
+          <GroupIcon>
+            <InboxIcon fontSize="small" />
+          </GroupIcon>
+          <ListItemText primary="Meeting" />
+        </StyledMenuItem>
+        <StyledMenuItem onClick={(e) => handleClose('Personal')}>
+          <SentimentSatisfiedAltIcon>
+            <InboxIcon fontSize="small" />
+          </SentimentSatisfiedAltIcon>
+          <ListItemText primary="Personal" />
+        </StyledMenuItem>
+        <StyledMenuItem onClick={(e) => handleClose('Work')}>
+          <WorkIcon>
+            <InboxIcon fontSize="small" />
+          </WorkIcon>
+          <ListItemText primary="Work" />
+        </StyledMenuItem>
+        <StyledMenuItem onClick={(e) => handleClose('Travel')}>
+          <FlightIcon>
+            <InboxIcon fontSize="small" />
+          </FlightIcon>
+          <ListItemText primary="Travel" />
+        </StyledMenuItem>
+      </StyledMenu>
+      
+    </div>
+  );
+}
