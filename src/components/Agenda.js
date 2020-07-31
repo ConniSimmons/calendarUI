@@ -44,7 +44,10 @@ export default class Agenda extends Component {
       let currentDate = moment();
       let otherDate = item.start;
       currentDate.diff(otherDate, 'days') 
-      /*trying to make a vunction to indicate a past event. We know the way it's rendering is wrong right now, but at least we can see what's going on.  Eventually, we'll hide most of the toolbar and then stick a link in there.*/
+      /*trying to make a function to indicate a past event. We 
+      know the way it's rendering is wrong right now, but at least 
+      we can see what's going on. Eventually, we'll hide most of 
+      the toolbar and then stick a link in there.*/
   }
   
   return;
@@ -57,7 +60,7 @@ export default class Agenda extends Component {
     
     return (
       <div>
-        <h4>AGENDA</h4>
+        <h4>AGENDA VIEW</h4>
       
         
         <div className="App">
