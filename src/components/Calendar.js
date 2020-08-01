@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
-// import axios from 'axios';
 import ModalMenu from "./ModalMenu";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
@@ -44,19 +43,10 @@ export default class Calendar extends Component {
       console.log('categoryUpdate', category);
   }
 
-  // getCachedEvents(){
-  //   const cachedEvents = localStorage.getItem("cachedEvents");
-  //   console.log("Cached Events", JSON.parse(cachedEvents));
-  //   if(cachedEvents){
-  //       this.setState({events: JSON.parse(cachedEvents)})
-  //   }
-  //   return;
-  // }
-
   getEvents = () => {
-    //axios
-    fetch('http://localhost:5656/api/events')
-    //.get("http://localhost:5656/api/events")
+    
+    //fetch('http://localhost:5656/api/events')
+    fetch('https://helio-calendar-api.herokuapp.com/api/events')
       .then((response) => {
         return response.json();
       })
@@ -130,8 +120,8 @@ export default class Calendar extends Component {
     events.push(appointment);
    
         // and some other stuff
-		let route = `http://localhost:5656/api/events`;
-    //let route = `https://helio-calendar-api.herokuapp.com/api/events`;
+		//let route = `http://localhost:5656/api/events`;
+    let route = `https://helio-calendar-api.herokuapp.com/api/events`;
     let submitData = { ...this.state };
 		delete submitData._id;
         let options = {
@@ -171,8 +161,8 @@ export default class Calendar extends Component {
     //event.preventDefault();
 		console.log('first state: ', this.state);
 		// and some other stuff
-		let route = 'http://localhost:5656/api/events';
-		//let route = 'https://helio-calendar-api.herokuapp.com/api/events';
+		//let route = 'http://localhost:5656/api/events';
+		let route = 'https://helio-calendar-api.herokuapp.com/api/events';
 		// we need the _id in state to make stuff work but we don't actually want to submit it
 		let submitData = { ...this.state };
 		delete submitData._id;
@@ -216,8 +206,8 @@ export default class Calendar extends Component {
 		let fetchOptions = {
 			method: 'DELETE'
 		};
-		fetch(`http://localhost:5656/api/events/${id}`, fetchOptions)
-		//fetch(`https://helio-calendar-api.herokuapp.com/api/lists/${id}`, fetchOptions)
+		// fetch(`http://localhost:5656/api/events/${id}`, fetchOptions)
+		fetch(`https://helio-calendar-api.herokuapp.com/api/events/${id}`, fetchOptions)
 			.then((response) => {
 				return response.json();
 			})
@@ -310,7 +300,7 @@ export default class Calendar extends Component {
     <h3>Category: {this.state.category}</h3>
             <br />
           <TextField
-            floatingLabelText="Title"
+            floatingLabelText="* Title"
             onChange={e => {
               this.setTitle(e.target.value);
             }}

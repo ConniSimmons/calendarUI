@@ -62,6 +62,7 @@ export default function ModalMenu(props) {
 
   return (
     <div>
+      <p style={{ color: 'red' }}>items with * are required</p>
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
@@ -71,7 +72,7 @@ export default function ModalMenu(props) {
         onClick={handleClick}
        
       >
-        Choose Event Category
+        * Choose Event Category
       </Button>
       <StyledMenu
         style={{ zIndex: 1500 }}

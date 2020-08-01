@@ -15,8 +15,8 @@ export default class Agenda extends Component {
     };
   }
   getEvents = () => {
-    // fetch('https://helio-calendar-api.herokuapp.com/api/events')
-    fetch("http://localhost:5656/api/events")
+    fetch('https://helio-calendar-api.herokuapp.com/api/events')
+    //fetch("http://localhost:5656/api/events")
       .then((response) => {
         return response.json();
       })
