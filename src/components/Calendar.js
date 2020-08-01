@@ -276,7 +276,7 @@ export default class Calendar extends Component {
         {/* react-big-calendar library utilized to render calendar*/}
         <BigCalendar
           events={this.state.events}
-          views={["month", "week", "day", "agenda"]}
+          views={["month", /*"week", "day", */"agenda"]}
           timeslots={2}
           defaultView="month"
           defaultDate={new Date()}
