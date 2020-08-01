@@ -23,7 +23,7 @@
     "react-scripts": "^1.1.1"
   },
   "scripts": {
-    "predeploy": "ci= npm run build",
+    "predeploy": "CI= npm run build",
     "deploy": "gh-pages -b master -d build",
     "start": "react-scripts start",
     "build": "CI='' npx react-scripts build",
