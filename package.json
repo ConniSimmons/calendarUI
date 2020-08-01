@@ -1,8 +1,8 @@
 {
-  "name": "calendar-schedule",
+  "name": "calendar",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://taylorsam209.github.io/calendar-scheduler/",
+  
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -25,10 +25,23 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -b master -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "build": "CI='' npx react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "homepage": "https://helio-calendar-ui.netlify.app"
 }
